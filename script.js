@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleTheme = document.getElementById('theme-toggle');
     const body = document.body;
 
-    // API configuration
+    // API configuration - Free API Gemini
     const AI_CONFIG = {
         apiKey: 'AIzaSyC0f8QhzNJI24aiU0RvjAsjm0lGGqf1ML0',
         endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC0f8QhzNJI24aiU0RvjAsjm0lGGqf1ML0',
@@ -20,11 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 role: "user",
                 parts: [{
-                    text: `You're MyMusicBuddi, a chill AI buddy who only talks music. Help me explore tracks, learn about artists, and vibe with genres. 
-If I ask for lyrics, reply cleanly — like with headers, and space out verses or wrap them in code blocks. 
-Keep it Gen Z-ish (but not too much), call me "Friend", and don’t use many emojis. 
-If someone talks about non-music stuff, kindly say you're here only for music. 
-Feel free to add reasoning, list sources, and throw in some song facts or backstory.`
+                    text: `
+                    You're MyMusicBuddi — your chill AI that only talks music.
+Help me find tracks, learn about artists, and vibe through genres.
+Drop lyrics clean with sections like [Chorus], spaced or in code blocks.
+Keep it Gen Z-ish, call me stuff like "friend" or "bro" — no emoji spam.
+If it's not about music, let me know you're here just for the tunes.
+When lyrics are asked for, give the full version unless told otherwise.
+Add fun song facts, sources, and stories — keep it clean and formatted.
+For controversial artists, ask before sharing. If yes, ask if they want the messy parts or just the music.
+Tag NSFW or Trigger Warnings when needed.
+Skip politics unless it’s music-related.
+Always be helpful, real, and respectful — and if I ask, your name’s just “Buddi”.
+                    `
                 }]
             }
         ];
@@ -46,19 +54,22 @@ Feel free to add reasoning, list sources, and throw in some song facts or backst
         body.classList.add('light-theme');
     }
 
-    toggleTheme.addEventListener('click', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    themeToggleButton.addEventListener('click', () => {
         body.classList.toggle('dark-theme');
         // Change icon based on theme
         if (body.classList.contains('dark-theme')) {
-            toggleTheme.innerHTML = '<i class="fas fa-sun"></i>';
-            localStorage.setItem('theme', 'dark-theme');
+            themeToggleButton.innerHTML = '<i class="fas fa-sun"></i>';
         } else {
-            toggleTheme.innerHTML = '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', 'light-theme');
+            themeToggleButton.innerHTML = '<i class="fas fa-moon"></i>';
         }
     });
+});
 
-    // Handle User Message
+
     function handleUserMessage() {
         const message = userInput.value.trim();
         if (message === '') return;
@@ -85,18 +96,17 @@ Feel free to add reasoning, list sources, and throw in some song facts or backst
             });
     }
 
-    // Add Static User or AI Message
+    // Add Static User Message
     function addStaticMessage(message, sender) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`, 'fade-in');
         const paragraph = document.createElement('p');
-        paragraph.innerHTML = message;
+        paragraph.innerHTML = marked.parse(message);
         messageElement.appendChild(paragraph);
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Add Typing Indicator
     function addTypingIndicator() {
         const typingElement = document.createElement('div');
         typingElement.classList.add('message', 'ai-message', 'typing-indicator');
@@ -165,7 +175,6 @@ Feel free to add reasoning, list sources, and throw in some song facts or backst
         }
     }
 
-    // Type the AI Message with Delay
     function typeMessageWithFormat(message, sender) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`, 'fade-in');
@@ -175,8 +184,8 @@ Feel free to add reasoning, list sources, and throw in some song facts or backst
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
+        const formattedMessage = marked.parse(message);
         let currentIndex = 0;
-        const formattedMessage = message;
 
         function typeNextChar() {
             if (currentIndex < formattedMessage.length) {
@@ -192,7 +201,6 @@ Feel free to add reasoning, list sources, and throw in some song facts or backst
         typeNextChar();
     }
 
-    // Disable/Enable Input
     function disableInput(disabled) {
         userInput.disabled = disabled;
         sendButton.disabled = disabled;
