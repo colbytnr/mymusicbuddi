@@ -1,32 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyMusicBuddi</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- FontAwesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.10/marked.min.js"></script> <!-- Markdown Parser -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MyMusicBuddi - Your AI Music Companion</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
+    <!-- Marked.js for markdown support -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="container">
-        <!-- Topbar -->
-        <div id="topbar">
-            <h1>MyMusicBuddi</h1>
-            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+    <header>
+        <div class="logo-container">
+            <h1><i class="fas fa-music"></i> MyMusicBuddi</h1>
+            <p class="tagline">Your AI-Powered Music Companion</p>
         </div>
+        <nav>
+            <ul>
+                <li><a href="#discover">Discover</a></li>
+                <li><a href="#create">Create</a></li>
+                <li><a href="#chat">AI Chat</a></li>
+                <li><button class="login-btn">Login</button></li>
+                <li><button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Chatbox Section -->
-        <div id="chatbox">
-            <div id="chat-messages"></div>
-            <div id="input-box">
-                <textarea id="user-input" placeholder="Say something..."></textarea>
-                <button id="send-button">Send</button>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Your Personal Music AI Assistant</h2>
+            <p>Ask anything about music, get personalized recommendations</p>
+            <button class="cta-button">Get Started</button>
+        </div>
+    </section>
+
+    <section id="chat" class="chat-section">
+        <h2>Chat with MyMusicBuddi AI</h2>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="user-input" placeholder="Ask about music, artists, recommendations..." />
+                <button id="send-button"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-    </div>
+        <div class="notice">
+            <p>NOTICE: This AI can make Mistakes!</p>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <section id="discover" class="discover-section">
+        <h2>Discover New Music</h2>
+        <div class="music-cards">
+            <div class="music-card">
+                <div class="album-art placeholder"></div>
+                <h3>Trending Now</h3>
+                <p>Discover what's hot right now</p>
+            </div>
+            <div class="music-card">
+                <div class="album-art placeholder"></div>
+                <h3>For You</h3>
+                <p>AI-powered recommendations</p>
+            </div>
+            <div class="music-card">
+                <div class="album-art placeholder"></div>
+                <h3>Explore Genres</h3>
+                <p>Venture into new musical territories</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3><i class="fas fa-music"></i> MyMusicBuddi</h3>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-spotify"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MyMusicBuddi. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
